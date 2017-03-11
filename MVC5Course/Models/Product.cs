@@ -11,6 +11,7 @@ namespace MVC5Course.Models
 {
   using System;
   using System.Collections.Generic;
+  using System.ComponentModel;
   using System.ComponentModel.DataAnnotations;
 
   public partial class Product
@@ -24,6 +25,7 @@ namespace MVC5Course.Models
     public int ProductId { get; set; }
     //可參考PDF(P62)
     [Required(ErrorMessage ="請輸入商品名稱{0}")]
+    [DisplayName("商品名稱")]
     public string ProductName { get; set; }
     [Required][Range(100, 500,ErrorMessage ="價錢需輸入100~500,請重新輸入{0}")]
     public Nullable<decimal> Price { get; set; }
