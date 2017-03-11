@@ -4,6 +4,9 @@
   ViewBag.Title = "Index";
 }
 
+@using PagedList
+@using PagedList.Mvc
+
 <h2>Index</h2>
 <form>
     @Html.TextBox("keyword")
@@ -13,6 +16,8 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@*@Html.PagedListPager(Model as IPagedList, (p) => Url.Action("Index", new { pageNo = p }))*@
+@Html.PagedListPager(Model as IPagedList, (p) => Url.Action("Index", new { pageNo = p }))
 <table class="table">
     <tr>
         <th>
