@@ -19,17 +19,17 @@ namespace MVC5Course.Controllers
     {
       var data = db.Product.AsQueryable();
 
+      if (string.IsNullOrEmpty(keyword) == false)
+      {
+        data = data.Where(p => p.ProductName.Contains(keyword));
+      }
+
       if (sortby == "+price")
       {
         data = data.OrderBy(p => p.Price);
       }else if (sortby == "-price")
       {
         data = data.OrderByDescending(p => p.Price);
-      }
-
-      if (string.IsNullOrEmpty(keyword) == false)
-      {
-        data = data.Where(p => p.ProductName.Contains(keyword));
       }
 
       //return View(db.Product.OrderByDescending(p => p.ProductId).Take(10).ToList());
