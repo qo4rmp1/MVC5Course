@@ -5,7 +5,10 @@
 }
 
 <h2>Index</h2>
-
+<form>
+    <input type="search" name="keyword" />
+    <input type="submit" value="Search"/>
+</form>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -15,7 +18,9 @@
             @Html.DisplayNameFor(model => model.ProductName)
         </th>
         <th>
+            <a href="@Url.Action("Index", "Products", new { sortby="+price", keyword=ViewBag.keyword})">up</a>
             @Html.DisplayNameFor(model => model.Price)
+            <a href="@Url.Action("Index", "Products", new { soryby="-price", keyword=ViewBag.keyword})">down</a>
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Active)
