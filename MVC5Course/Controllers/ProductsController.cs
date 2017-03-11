@@ -33,7 +33,7 @@ namespace MVC5Course.Controllers
       }
 
       //return View(db.Product.OrderByDescending(p => p.ProductId).Take(10).ToList());
-      ViewBag.keyword = keyword;
+      //ViewBag.keyword = keyword;
       return View(data.Take(10));
     }
 
