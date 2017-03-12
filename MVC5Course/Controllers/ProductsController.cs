@@ -13,12 +13,15 @@ namespace MVC5Course.Controllers
 {
   public class ProductsController : Controller
   {
-    private FabricsEntities db = new FabricsEntities();
+    //private FabricsEntities db = new FabricsEntities();
+    //memo:要執行RepositoryHelper.GetProductRepository();才能建立資料庫連線
+    //因為建立資料庫連線寫在GetUnitOfWork()中
+    ProductRepository pro = RepositoryHelper.GetProductRepository();
 
     // GET: Products
     public ActionResult Index(string sortby, string keyword, int pageNo = 1)
     {
-      var data = db.Product.AsQueryable();
+      var data = pro.All().AsQueryable();
 
       if (string.IsNullOrEmpty(keyword) == false)
       {
@@ -47,7 +50,8 @@ namespace MVC5Course.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      Product product = db.Product.Find(id);
+
+      Product product = pro.Find(id);
       if (product == null)
       {
         return HttpNotFound();
@@ -70,8 +74,8 @@ namespace MVC5Course.Controllers
     {
       if (ModelState.IsValid)
       {
-        db.Product.Add(product);
-        db.SaveChanges();
+        pro.Add(product);
+        pro.UnitOfWork.Commit();
         return RedirectToAction("Index");
       }
 
@@ -85,7 +89,7 @@ namespace MVC5Course.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      Product product = db.Product.Find(id);
+      Product product = pro.Find(id);
       if (product == null)
       {
         return HttpNotFound();
@@ -102,6 +106,7 @@ namespace MVC5Course.Controllers
     {
       if (ModelState.IsValid)
       {
+        var db = pro.UnitOfWork.Context;
         db.Entry(product).State = EntityState.Modified;
         db.SaveChanges();
         return RedirectToAction("Index");
@@ -116,7 +121,7 @@ namespace MVC5Course.Controllers
       {
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
-      Product product = db.Product.Find(id);
+      Product product = pro.Find(id);
       if (product == null)
       {
         return HttpNotFound();
@@ -129,12 +134,15 @@ namespace MVC5Course.Controllers
     [ValidateAntiForgeryToken]
     public ActionResult DeleteConfirmed(int id)
     {
-      Product product = db.Product.Find(id);
-      db.Product.Remove(product);
-      db.SaveChanges();
+      Product product = pro.Find(id);
+      pro.Delete(product);
+      //memo:UnitOfWork處理所有和資料庫有關的動作。DB連線、儲存。
+      pro.UnitOfWork.Commit();
       return RedirectToAction("Index");
     }
 
+    /*
+    //若網站一秒瞬間流量有幾十萬筆以上，沒辦法等到GC.Collect()回收機制回收資料庫連線，就必須做Dispose。
     protected override void Dispose(bool disposing)
     {
       if (disposing)
@@ -143,5 +151,6 @@ namespace MVC5Course.Controllers
       }
       base.Dispose(disposing);
     }
+    */
   }
 }
