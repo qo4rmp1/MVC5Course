@@ -36,7 +36,7 @@ namespace MVC5Course.Controllers
       return View();
     }
     [HttpPost]
-    public ActionResult Login(LoginVM login)
+    public ActionResult Login(LoginVM login)  //使用強型別接收  //(string UserName, string PassWord)
     {
       return Content(String.Format("{0}:{1}", login.UserName, login.PassWord));
     }
