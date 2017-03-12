@@ -14,5 +14,12 @@ namespace MVC5Course.Models
     [Required]
     [MinLength(6)]
     public String PassWord { get; set; }
+    public bool LoginCheck()
+    {
+      bool CheckOK = false;
+      //check with EntityFramework
+      //另一方式可以把ViewModel放在EntityFramework Member's Model下,就不會太多層
+      return CheckOK;
+    }
   }
 }
