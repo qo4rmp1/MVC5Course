@@ -27,7 +27,7 @@ namespace MVC5Course.Models
     [Required(ErrorMessage ="請輸入商品名稱{0}")]
     [DisplayName("商品名稱")]
     public string ProductName { get; set; }
-    [Required][Range(100, 500,ErrorMessage ="價錢需輸入100~500,請重新輸入{0}")]
+    [Required]
     [DisplayFormat(DataFormatString ="NT$ {0:N0}")]
     public Nullable<decimal> Price { get; set; }
     [Required]
