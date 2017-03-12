@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MVC5Course.Models
 {
-  public class LoginVM
+  public class LoginVM : IValidatableObject
   {
     [Required]
     [MinLength(3)]
@@ -19,7 +19,20 @@ namespace MVC5Course.Models
       bool CheckOK = false;
       //check with EntityFramework
       //另一方式可以把ViewModel放在EntityFramework Member's Model下,就不會太多層
+      CheckOK = (this.UserName == "adm" && this.PassWord == "admadm");      
       return CheckOK;
+    }
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+      if (LoginCheck())
+      {
+        yield return ValidationResult.Success;
+      }
+      else
+      {
+        yield return new ValidationResult("登入錯誤", new string[] { "UserName" });
+      }
     }
   }
 }

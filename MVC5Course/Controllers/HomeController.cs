@@ -38,7 +38,14 @@ namespace MVC5Course.Controllers
     [HttpPost]
     public ActionResult Login(LoginVM login)  //使用強型別接收  //(string UserName, string PassWord)
     {
-      return Content(String.Format("{0}:{1}", login.UserName, login.PassWord));
+      if (ModelState.IsValid)
+      {
+        return Content(String.Format("{0}:{1}", login.UserName, login.PassWord));
+      }
+      else
+      {
+        return Content("Login Failed!");
+      }
     }
   }
 }
