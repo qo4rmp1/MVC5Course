@@ -70,7 +70,7 @@ namespace MVC5Course.Controllers
     // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+    public ActionResult Create([Bind(Include = "ProductId,ProductName,Price,Active,Stock,IsDeleted")] Product product)
     {
       if (ModelState.IsValid)
       {
@@ -102,7 +102,7 @@ namespace MVC5Course.Controllers
     // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+    public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock,IsDeleted")] Product product)
     {
       if (ModelState.IsValid)
       {
@@ -138,11 +138,12 @@ namespace MVC5Course.Controllers
       pro.Delete(product);
       //memo:UnitOfWork處理所有和資料庫有關的動作。DB連線、儲存。
       pro.UnitOfWork.Commit();
+
       return RedirectToAction("Index");
     }
 
     /*
-    //若網站一秒瞬間流量有幾十萬筆以上，沒辦法等到GC.Collect()回收機制回收資料庫連線，就必須做Dispose。
+    //若網站一秒瞬間流量有幾十萬筆以上，沒辦法等到GC.Collect()回收機制回收資料庫連線，就必須實做Dispose。
     protected override void Dispose(bool disposing)
     {
       if (disposing)
