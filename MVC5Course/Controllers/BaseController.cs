@@ -13,7 +13,7 @@ namespace MVC5Course.Controllers
     //但BaseController也沒有Action,所以頂多實作HandleUnknownAction
     public class BaseController : Controller
     {
-        public ProductRepository pro = RepositoryHelper.GetProductRepository();
+        public ProductRepository repoProduct = RepositoryHelper.GetProductRepository();
 
         //當Controller找不到Action時,實作HandleUnknownAction,將之導向至首頁
         //也可固定導向至別的Controller/Action(ex:this.RedirectToAction("About", "Home"))

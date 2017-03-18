@@ -18,9 +18,60 @@ namespace MVC5Course.Controllers
         //因為建立資料庫連線寫在GetUnitOfWork()中
 
         // GET: Products
-        public ActionResult Index(string sortby, string keyword, int pageNo = 1)
+        public ActionResult Index(string sortBy, string keyword, int pageNo = 1)
         {
-            var data = pro.All().AsQueryable();
+            IQueryable<Product> repoData = DoSearchOnIndex(sortBy, keyword, pageNo);
+
+            return View(repoData.ToPagedList(pageNo, 10));
+        }
+
+        private IQueryable<Product> DoSearchOnIndex(string sortBy, string keyword, int pageNo)
+        {
+            var repoData = repoProduct.All().AsQueryable();
+
+            if (!String.IsNullOrEmpty(keyword))
+            {
+                repoData = repoData.Where(p => p.ProductName.Contains(keyword));
+            }
+
+            if (sortBy == "+Price")
+            {
+                repoData = repoData.OrderBy(p => p.Price);
+            }
+            else
+            {
+                repoData = repoData.OrderByDescending(p => p.Price);
+            }
+
+            ViewBag.keyword = keyword;
+
+            ViewData.Model = repoData.ToPagedList(pageNo, 10);
+            return repoData;
+        }
+
+        [HttpPost]
+        public ActionResult Index(Product[] data, string sortBy, string keyword, int pageNo)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var item in data)
+                {
+                    var FindItem = repoProduct.Find(item.ProductId);
+                    FindItem.ProductId = item.ProductId;
+                    FindItem.ProductName = item.ProductName;
+                    FindItem.Price = item.Price;
+                    FindItem.Stock = item.Stock;
+                    FindItem.Active = item.Active;
+                }
+                repoProduct.UnitOfWork.Commit();
+                return RedirectToAction("Index");
+            }
+
+            DoSearchOnIndex(sortBy, keyword, pageNo);
+            return View();
+        }
+
+        /* var data = pro.All().AsQueryable();
 
             if (string.IsNullOrEmpty(keyword) == false)
             {
@@ -35,20 +86,8 @@ namespace MVC5Course.Controllers
             //  data = data.OrderByDescending(p => p.Price);
             //}
             data = data.OrderBy(p => p.Price);
-            //data = data.ToPagedList(pageNo, 10).AsQueryable();
-            //return View(db.Product.OrderByDescending(p => p.ProductId).Take(10).ToList());
             ViewBag.keyword = keyword;
-
-            /*
-             　ViewData的用法
-            　 return View((Object)Model);
-            　 等同於
-             　ViewData.Model = data.ToPagedList(pageNo, 10);
-             　return View();
-             */
-            return View(data.ToPagedList(pageNo, 10));
-        }
-
+        */
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
@@ -57,7 +96,7 @@ namespace MVC5Course.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Product product = pro.Find(id);
+            Product product = repoProduct.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -80,8 +119,8 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
-                pro.Add(product);
-                pro.UnitOfWork.Commit();
+                repoProduct.Add(product);
+                repoProduct.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -95,7 +134,7 @@ namespace MVC5Course.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = pro.Find(id);
+            Product product = repoProduct.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -112,7 +151,7 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
-                var db = pro.UnitOfWork.Context;
+                var db = repoProduct.UnitOfWork.Context;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -127,7 +166,7 @@ namespace MVC5Course.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = pro.Find(id);
+            Product product = repoProduct.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -140,10 +179,10 @@ namespace MVC5Course.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = pro.Find(id);
-            pro.Delete(product);
+            Product product = repoProduct.Find(id);
+            repoProduct.Delete(product);
             //memo:UnitOfWork處理所有和資料庫有關的動作。DB連線、儲存。
-            pro.UnitOfWork.Commit();
+            repoProduct.UnitOfWork.Commit();
 
             return RedirectToAction("Index");
         }

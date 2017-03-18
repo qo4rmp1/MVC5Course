@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MVC5Course.Models.Product>
 
 @{
-  ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
@@ -15,46 +15,60 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 @*@Html.PagedListPager(Model as IPagedList, (p) => Url.Action("Index", new { pageNo = p }))*@
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            <a href="@Url.Action("Index", "Products", new { sortby="+price", keyword=ViewBag.keyword})">up</a>
-            @Html.DisplayNameFor(model => model.Price)
-            <a href="@Url.Action("Index", "Products", new { soryby="-price", keyword=ViewBag.keyword})">down</a>
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stock)
-        </th>
-        <th></th>
-    </tr>
+@*
+    注意:input Control Name是CS___8__locals1_data_0__ProductName
+    要去NuGet移除DoNet編譯器
+*@
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "Products", new { sortby = "+price", keyword = ViewBag.keyword })">up</a>
+                @Html.DisplayNameFor(model => model.Price)
+                <a href="@Url.Action("Index", "Products", new { soryby = "-price", keyword = ViewBag.keyword })">down</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th></th>
+        </tr>
 
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td class="@(item.Price > 50 ? "text-danger" : "")">
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
-        </td>
-    </tr>
-    }
+        @{
+            var data = Model.ToArray();
+        }
 
-</table>
+        @for (var i = 0; i < data.Length; i++)
+        {
+            //記得要加上 ProductId
+            @Html.HiddenFor(modelItem => data[i].ProductId)
+            <tr>
+                <td>
+                    @Html.EditorFor(modelItem => data[i].ProductName)
+                </td>
+                <td class="@(data[i].Price > 50 ? "text-danger" : "")">
+                    @Html.EditorFor(modelItem => data[i].Price)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => data[i].Active)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => data[i].Stock)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = data[i].ProductId }) |
+                    @Html.ActionLink("Details", "Details", new { id = data[i].ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = data[i].ProductId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <input type="submit" value="編輯" />
+            }
