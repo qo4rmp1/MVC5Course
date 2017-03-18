@@ -51,15 +51,19 @@
             <tr>
                 <td>
                     @Html.EditorFor(modelItem => data[i].ProductName)
+                    @Html.ValidationMessageFor(modelItem => data[i].ProductName)
                 </td>
                 <td class="@(data[i].Price > 50 ? "text-danger" : "")">
                     @Html.EditorFor(modelItem => data[i].Price)
+                    @Html.ValidationMessageFor(modelItem => data[i].Price)
                 </td>
                 <td>
                     @Html.EditorFor(modelItem => data[i].Active)
+                    @Html.ValidationMessageFor(modelItem => data[i].Active)
                 </td>
                 <td>
                     @Html.EditorFor(modelItem => data[i].Stock)
+                    @Html.ValidationMessageFor(modelItem => data[i].Stock)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = data[i].ProductId }) |

@@ -141,7 +141,7 @@ namespace MVC5Course.Controllers
             }
             return View(product);
         }
-
+        
         // POST: Products/Edit/5
         // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
@@ -158,7 +158,18 @@ namespace MVC5Course.Controllers
             }
             return View(product);
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, FormCollection form)
+        {
+            var product = repoProduct.Find(id);
+            if (TryUpdateModel(product, new string[] { "ProductName", "Stock" }))
+            {
+                repoProduct.UnitOfWork.Commit();
+                return RedirectToAction("Index");
+            }
+            return View(product);
+        }
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
