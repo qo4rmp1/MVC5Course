@@ -21,5 +21,25 @@ namespace MVC5Course.Controllers
         {
             return View();
         }
+        //public ActionResult File1()
+        //{
+        //    return File(Server.MapPath("~/Content/a.jpg"), "image/png");
+        //}
+        //public ActionResult File2()
+        //{
+        //    return File(Server.MapPath("~/Content/a.jpg"), "image/png", "下載檔案.png");
+        //}
+        public ActionResult File1()
+        {
+            //return File(@"C:\Projects\MVC5Course\MVC5Course\Content\251178_medium.png", "image/png");
+            return File(Server.MapPath("~/Content/a.jpg"), "image/jpeg");
+        }
+ 
+        public ActionResult File2()
+        {
+            //return File(@"C:\Projects\MVC5Course\MVC5Course\Content\251178_medium.png", "image/png");
+            return File(Server.MapPath("~/Content/b.jpg"), "image/jpeg", "圖片下載.jpg");
+        }
+  
     }
 }

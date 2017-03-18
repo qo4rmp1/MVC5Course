@@ -6,4 +6,11 @@
 }
 
 <h2>View3</h2>
-
+@*File1 - 靜態顯示圖片*@
+@*<img src="@Url.Action("File1")" alt="" />*@
+@*File2 - 靜態顯示圖片*@
+@*<img src="@Url.Action("File2")" alt="" />*@
+@*File2 - a 點擊下載*@
+@*<a href="@Url.Action("File2")">File Download</a>*@
+@*File1 - 靜態顯示圖片 + File2 - a 點擊下載*@
+<a href="@Url.Action("File2")"><img src="@Url.Action("File1")" alt="" /></a> 
