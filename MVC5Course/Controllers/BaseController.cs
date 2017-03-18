@@ -7,7 +7,9 @@ using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
 {
-    //最好加上 abstract, 這樣才不會有人使用Url:/Base/連到這個controller
+    //加上BaseController,全部套用授權
+    [Authorize]
+    //最好加上 abstract,這樣才不會有人使用Url:/Base/連到這個controller
     //但BaseController也沒有Action,所以頂多實作HandleUnknownAction
     public class BaseController : Controller
     {

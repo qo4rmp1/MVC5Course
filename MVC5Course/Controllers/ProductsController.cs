@@ -11,7 +11,6 @@ using PagedList;
 
 namespace MVC5Course.Controllers
 {
-  [Authorize]
   public class ProductsController : BaseController
     {
     //private FabricsEntities db = new FabricsEntities();
