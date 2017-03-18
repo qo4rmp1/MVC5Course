@@ -15,31 +15,37 @@ namespace MVC5Course.Controllers
         }
         public ActionResult View2()
         {
+            /*
+            講義P92
+            PartialViewResult
+            return PartialView();
+            與 ViewResult 唯一的差異 ：不會載入 _Layout
+            */
             return PartialView("Index");
         }
         public ActionResult View3()
         {
             return View();
         }
-        //public ActionResult File1()
-        //{
-        //    return File(Server.MapPath("~/Content/a.jpg"), "image/png");
-        //}
-        //public ActionResult File2()
-        //{
-        //    return File(Server.MapPath("~/Content/a.jpg"), "image/png", "下載檔案.png");
-        //}
         public ActionResult File1()
         {
-            //return File(@"C:\Projects\MVC5Course\MVC5Course\Content\251178_medium.png", "image/png");
             return File(Server.MapPath("~/Content/a.jpg"), "image/jpeg");
         }
- 
         public ActionResult File2()
         {
-            //return File(@"C:\Projects\MVC5Course\MVC5Course\Content\251178_medium.png", "image/png");
-            return File(Server.MapPath("~/Content/b.jpg"), "image/jpeg", "圖片下載.jpg");
+            return File(Server.MapPath("~/Content/b.jpg"), "image/jpeg", "下載檔案.jpg");
         }
-  
+        public ActionResult Redirect1()
+        {
+            //HTTP301永久轉址=>google SEO PageRaking才會繼續累加
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult Redirect2()
+        {
+            //HTTP302暫時轉址
+            return RedirectToActionPermanent("Index", "Home");
+        }
+
+
     }
 }
