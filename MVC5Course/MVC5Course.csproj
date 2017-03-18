@@ -190,6 +190,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ARController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\MBController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Models\Client.cs">
       <DependentUpon>FabricsModel.tt</DependentUpon>
@@ -402,6 +403,7 @@
     <Content Include="Views\AR\Index.cshtml" />
     <Content Include="Views\AR\View2.cshtml" />
     <Content Include="Views\AR\View3.cshtml" />
+    <Content Include="Views\MB\Form1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
