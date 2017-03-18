@@ -12,13 +12,12 @@ using PagedList;
 namespace MVC5Course.Controllers
 {
   [Authorize]
-  public class ProductsController : Controller
-  {
+  public class ProductsController : BaseController
+    {
     //private FabricsEntities db = new FabricsEntities();
     //memo:要執行RepositoryHelper.GetProductRepository();才能建立資料庫連線
     //因為建立資料庫連線寫在GetUnitOfWork()中
-    ProductRepository pro = RepositoryHelper.GetProductRepository();
-
+    
     // GET: Products
     public ActionResult Index(string sortby, string keyword, int pageNo = 1)
     {
