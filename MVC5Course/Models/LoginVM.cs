@@ -9,17 +9,17 @@ namespace MVC5Course.Models
   public class LoginVM : IValidatableObject
   {
     [Required]
-    [MinLength(3)]
+    //[MinLength(3)]
     public String UserName { get; set; }
     [Required]
-    [MinLength(6)]
+    //[MinLength(6)]
     public String PassWord { get; set; }
     public bool LoginCheck()
     {
       bool CheckOK = false;
       //check with EntityFramework
       //另一方式可以把ViewModel放在EntityFramework Member's Model下,就不會太多層
-      CheckOK = (this.UserName == "adm" && this.PassWord == "admadm");      
+      CheckOK = (this.UserName == "admin" && this.PassWord == "admin");      
       return CheckOK;
     }
 
