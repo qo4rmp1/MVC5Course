@@ -37,10 +37,12 @@ namespace MVC5Course.Controllers
       return View();
     }
     [HttpPost]
-    public ActionResult Login(LoginVM login, string ReturnUrl)  //使用強型別接收  //(string UserName, string PassWord)
+    public ActionResult Login(LoginVM login, string ReturnUrl = "")  //使用強型別接收  //(string UserName, string PassWord)
     {
       if (ModelState.IsValid)
       {
+        TempData["LoginResult"] = login;
+
         FormsAuthentication.RedirectFromLoginPage(login.UserName, false);
         if (ReturnUrl.StartsWith("/"))
         {
