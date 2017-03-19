@@ -48,3 +48,12 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@*@model.OrderLine
+@foreach (var item in Model.OrderLine)
+{
+}*@
+
+@Html.Partial("ProductOrderLines", Model.OrderLine)
+
+@Html.Action("ProductOrderLines", new { id = Model.ProductId })

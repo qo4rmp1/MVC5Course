@@ -191,6 +191,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="ActionFilters\僅在本機開發測試用Attribute.cs" />
     <Compile Include="Controllers\VTController.cs" />
+    <Compile Include="Metro\MetroController.cs" />
     <Compile Include="Models\Client.cs">
       <DependentUpon>FabricsModel.tt</DependentUpon>
     </Compile>
@@ -407,7 +408,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-    <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Test\Test2.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
@@ -426,6 +426,10 @@
     <Content Include="Views\VT\RazorTest.cshtml" />
     <Content Include="Views\Home\TestPage.cshtml" />
     <Content Include="Views\Shared\_Layout.Metro.cshtml" />
+    <Content Include="Views\Metro\Index.cshtml" />
+    <Content Include="Views\Metro\_ViewStart.cshtml" />
+    <Content Include="Views\Metro\Forms.cshtml" />
+    <Content Include="Views\Products\ProductOrderLines.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

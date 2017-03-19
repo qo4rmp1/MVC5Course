@@ -17,13 +17,12 @@ namespace MVC5Course.Controllers
         //private FabricsEntities db = new FabricsEntities();
         //memo:要執行RepositoryHelper.GetProductRepository();才能建立資料庫連線
         //因為建立資料庫連線寫在GetUnitOfWork()中
-
         // GET: Products
         public ActionResult Index(string sortBy, string keyword, int pageNo = 1)
         {
             IQueryable<Product> repoData = DoSearchOnIndex(sortBy, keyword, pageNo);
 
-            return View(repoData.ToPagedList(pageNo, 10));
+            return View(repoData.ToPagedList(pageNo, 100));
         }
 
         private IQueryable<Product> DoSearchOnIndex(string sortBy, string keyword, int pageNo)
@@ -105,6 +104,15 @@ namespace MVC5Course.Controllers
             return View(product);
         }
 
+        public ActionResult ProductOrderLines(int id)
+        {
+            Product product = repoProduct.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product.OrderLine);
+        }
         // GET: Products/Create
         public ActionResult Create()
         {
@@ -142,7 +150,7 @@ namespace MVC5Course.Controllers
             }
             return View(product);
         }
-        
+
         // POST: Products/Edit/5
         // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
@@ -168,8 +176,8 @@ namespace MVC5Course.Controllers
             if (TryUpdateModel(product, new string[] { "ProductName", "Stock" }))
             {
             }
-                repoProduct.UnitOfWork.Commit();
-                return RedirectToAction("Index");
+            repoProduct.UnitOfWork.Commit();
+            return RedirectToAction("Index");
             //return View(product);
         }
         // GET: Products/Delete/5
