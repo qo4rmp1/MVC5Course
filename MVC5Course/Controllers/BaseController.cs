@@ -21,7 +21,7 @@ namespace MVC5Course.Controllers
         //也可固定導向至別的Controller/Action(ex:this.RedirectToAction("About", "Home"))
         protected override void HandleUnknownAction(string actionName)
         {
-            this.Redirect("/").ExecuteResult(this.ControllerContext);
+            //this.Redirect("/").ExecuteResult(this.ControllerContext);
             //base.HandleUnknownAction(actionName);
         }
         /*

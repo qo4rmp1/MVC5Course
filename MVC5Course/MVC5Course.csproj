@@ -289,6 +289,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="calendar.html" />
+    <Content Include="chart.html" />
     <Content Include="Content\a.jpg" />
     <Content Include="Content\b.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -296,6 +298,13 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="file-manager.html" />
+    <Content Include="form.html" />
+    <Content Include="gallery.html" />
+    <Content Include="icon.html" />
+    <Content Include="index.html" />
+    <Content Include="login.html" />
+    <Content Include="messages.html" />
     <Content Include="Models\EFGeneratePartialClass.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EFGeneratePartialClass.cs</LastGenOutput>
@@ -328,6 +337,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="widgets.html" />
     <EntityDeploy Include="Models\FabricsModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FabricsModel.Designer.cs</LastGenOutput>
@@ -335,6 +345,7 @@
     <Content Include="Models\FabricsModel.edmx.diagram">
       <DependentUpon>FabricsModel.edmx</DependentUpon>
     </Content>
+    <Content Include="README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -353,6 +364,13 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="submenu.html" />
+    <Content Include="submenu2.html" />
+    <Content Include="submenu3.html" />
+    <Content Include="table.html" />
+    <Content Include="tasks.html" />
+    <Content Include="typography.html" />
+    <Content Include="ui.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -406,9 +424,15 @@
     <Content Include="Views\Shared\Error_ArgumentException.cshtml" />
     <Content Include="Views\Shared\Error_DbEntityValidationException.cshtml" />
     <Content Include="Views\VT\RazorTest.cshtml" />
+    <Content Include="Views\Home\TestPage.cshtml" />
+    <Content Include="Views\Shared\_Layout.Metro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="css\" />
+    <Folder Include="font\" />
+    <Folder Include="img\" />
+    <Folder Include="js\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
