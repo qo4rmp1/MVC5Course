@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
 using PagedList;
+using System.Data.Entity.Validation;
 
 namespace MVC5Course.Controllers
 {
@@ -50,7 +51,7 @@ namespace MVC5Course.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Product[] data, string sortBy, string keyword, int pageNo)
+        public ActionResult Index(Product[] data)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +68,7 @@ namespace MVC5Course.Controllers
                 return RedirectToAction("Index");
             }
 
-            DoSearchOnIndex(sortBy, keyword, pageNo);
+            //DoSearchOnIndex(sortBy, keyword, pageNo);
             return View();
         }
 
@@ -145,30 +146,31 @@ namespace MVC5Course.Controllers
         // POST: Products/Edit/5
         // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock,IsDeleted")] Product product)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var db = repoProduct.UnitOfWork.Context;
+        //        db.Entry(product).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(product);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock,IsDeleted")] Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                var db = repoProduct.UnitOfWork.Context;
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(product);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HandleError(View = "Error_DbEntityValidationException", ExceptionType = typeof(DbEntityValidationException))]
         public ActionResult Edit(int id, FormCollection form)
         {
             var product = repoProduct.Find(id);
             if (TryUpdateModel(product, new string[] { "ProductName", "Stock" }))
             {
+            }
                 repoProduct.UnitOfWork.Commit();
                 return RedirectToAction("Index");
-            }
-            return View(product);
+            //return View(product);
         }
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)

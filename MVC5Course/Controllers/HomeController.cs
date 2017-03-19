@@ -8,61 +8,64 @@ using System.Web.Security;
 
 namespace MVC5Course.Controllers
 {
-  public class HomeController : Controller
-  {
-    public ActionResult Index()
+    public class HomeController : BaseController
     {
-      return View();
-    }
-
-    public ActionResult About()
-    {
-      ViewBag.Message = "Your application description page.1212121212";
-
-      return View();
-    }
-
-    public ActionResult Contact()
-    {
-      ViewBag.Message = "Your contact page.";
-
-      return View();
-    }
-    public ActionResult Test()
-    {
-      return View();
-    }
-    public ActionResult Login()
-    {
-      return View();
-    }
-    [HttpPost]
-    public ActionResult Login(LoginVM login, string ReturnUrl = "")  //使用強型別接收  //(string UserName, string PassWord)
-    {
-      if (ModelState.IsValid)
-      {
-        TempData["LoginResult"] = login;
-
-        FormsAuthentication.RedirectFromLoginPage(login.UserName, false);
-        if (ReturnUrl.StartsWith("/"))
+        public ActionResult Index()
         {
-          return Redirect(ReturnUrl);
+            return View();
         }
-        else
+
+        [設定本控制器常用的ViewBag資料Attribute]
+        public ActionResult About(string Msg = "")
         {
-          return RedirectToAction("Index");
-        }//return Content(String.Format("{0}:{1}", login.UserName, login.PassWord));
-      }
-      else
-      {
-        return Content("Login Failed!");
-      }
+            if (Msg.Contains("err"))
+            {
+                throw new IndexOutOfRangeException("ex");
+            }
+            return View();
+        }
+        [僅在本機開發測試用Attribute]
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult Test()
+        {
+            return View();
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(LoginVM login, string ReturnUrl = "")  //使用強型別接收  //(string UserName, string PassWord)
+        {
+            if (ModelState.IsValid)
+            {
+                TempData["LoginResult"] = login;
+
+                FormsAuthentication.RedirectFromLoginPage(login.UserName, false);
+                if (ReturnUrl.StartsWith("/"))
+                {
+                    return Redirect(ReturnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }//return Content(String.Format("{0}:{1}", login.UserName, login.PassWord));
+            }
+            else
+            {
+                return Content("Login Failed!");
+            }
+        }
+        [HttpPost]
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
+        }
     }
-    [HttpPost]
-    public ActionResult LogOff()
-    {
-      FormsAuthentication.SignOut();
-      return RedirectToAction("Index");
-    }
-  }
 }

@@ -1,4 +1,5 @@
-﻿using MVC5Course.Models;
+﻿using MVC5Course.ActionFilters;
+using MVC5Course.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,12 @@ using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
 {
+    [紀錄Action執行時間Attribute]
     //加上BaseController,全部套用授權
-    [Authorize]
+    //[Authorize]
     //最好加上 abstract,這樣才不會有人使用Url:/Base/連到這個controller
     //但BaseController也沒有Action,所以頂多實作HandleUnknownAction
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
         public ProductRepository repoProduct = RepositoryHelper.GetProductRepository();
 

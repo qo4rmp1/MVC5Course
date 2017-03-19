@@ -177,6 +177,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\紀錄Action執行時間.cs" />
+    <Compile Include="ActionFilters\設定本控制器常用的ViewBag資料Attribute - 複製.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -187,6 +189,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\MBController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="ActionFilters\僅在本機開發測試用Attribute.cs" />
+    <Compile Include="Controllers\VTController.cs" />
     <Compile Include="Models\Client.cs">
       <DependentUpon>FabricsModel.tt</DependentUpon>
     </Compile>
@@ -399,6 +403,9 @@
     <Content Include="Views\AR\View2.cshtml" />
     <Content Include="Views\AR\View3.cshtml" />
     <Content Include="Views\MB\Form1.cshtml" />
+    <Content Include="Views\Shared\Error_ArgumentException.cshtml" />
+    <Content Include="Views\Shared\Error_DbEntityValidationException.cshtml" />
+    <Content Include="Views\VT\RazorTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

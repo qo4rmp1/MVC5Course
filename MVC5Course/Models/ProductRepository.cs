@@ -43,9 +43,11 @@ namespace MVC5Course.Models
     /// <param name="entity"></param>
     public override void Delete(Product entity)
     {
-      entity.IsDeleted = true;
+            //this.UnitOfWork.Context.Configuration.ValidateOnSaveEnabled = false;
+            //entity.IsDeleted = true;
+            base.Delete(entity);
+        }
     }
-  }
 
   public  interface IProductRepository : IRepository<Product>
 	{
