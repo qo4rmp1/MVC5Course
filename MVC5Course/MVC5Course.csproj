@@ -193,8 +193,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\ProductsApiController.cs" />
     <Compile Include="Controllers\ARController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Clients1Controller.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\DdlController.cs" />
     <Compile Include="Controllers\MBController.cs" />
@@ -501,9 +503,28 @@
     <Content Include="Views\Shared\DisplayTemplates\CreditRating.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Ddl\Index.cshtml" />
+    <Content Include="Views\Clients1\Create.cshtml" />
+    <Content Include="Views\Clients1\Delete.cshtml" />
+    <Content Include="Views\Clients1\Details.cshtml" />
+    <Content Include="Views\Clients1\Edit.cshtml" />
+    <Content Include="Views\Clients1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="CodeTemplates\ApiControllerEmpty\" />
+    <Folder Include="CodeTemplates\ApiControllerWithActions\" />
+    <Folder Include="CodeTemplates\ApiControllerWithContext\" />
+    <Folder Include="CodeTemplates\ApiDependencyCodeGenerator\" />
+    <Folder Include="CodeTemplates\MvcArea\" />
+    <Folder Include="CodeTemplates\MvcControllerEmpty\" />
+    <Folder Include="CodeTemplates\MvcControllerWithActions\" />
+    <Folder Include="CodeTemplates\MvcControllerWithContext\" />
+    <Folder Include="CodeTemplates\MvcFullDependencyCodeGenerator\" />
+    <Folder Include="CodeTemplates\MvcMinimalDependencyCodeGenerator\" />
+    <Folder Include="CodeTemplates\MvcViewWithoutModel\" />
+    <Folder Include="CodeTemplates\MvcView\" />
+    <Folder Include="CodeTemplates\ODataControllerWithActions\" />
+    <Folder Include="CodeTemplates\ODataControllerWithContext\" />
     <Folder Include="css\" />
     <Folder Include="font\" />
     <Folder Include="img\" />
