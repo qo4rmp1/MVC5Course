@@ -196,6 +196,7 @@
     <Compile Include="Controllers\ARController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\DdlController.cs" />
     <Compile Include="Controllers\MBController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="ActionFilters\僅在本機開發測試用Attribute.cs" />
@@ -390,6 +391,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="widgets.html" />
     <EntityDeploy Include="Models\FabricsModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -497,6 +500,7 @@
     <Content Include="Views\Shared\DisplayTemplates\性別文字顯示.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CreditRating.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Ddl\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
