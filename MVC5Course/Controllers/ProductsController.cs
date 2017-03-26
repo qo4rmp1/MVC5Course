@@ -18,11 +18,15 @@ namespace MVC5Course.Controllers
         //memo:要執行RepositoryHelper.GetProductRepository();才能建立資料庫連線
         //因為建立資料庫連線寫在GetUnitOfWork()中
         // GET: Products
-        public ActionResult Index(string sortBy, string keyword, int pageNo = 1)
+        public ActionResult Index(string ActiveFilter, string sortBy, string keyword, int pageNo = 1)
         {
+            //ViewBag.ActiveFilter = new SelectList(new List<string> { "true", "false" });
+            var ActiveOptions = repoProduct.All().Select(p => p.Active.HasValue ? p.Active.Value.ToString() : "False").Distinct().ToList();
+            ViewBag.ActiveFilter = new SelectList(ActiveOptions);
+            
             IQueryable<Product> repoData = DoSearchOnIndex(sortBy, keyword, pageNo);
 
-            return View(repoData.ToPagedList(pageNo, 100));
+            return View(repoData.ToPagedList(pageNo, 10));
         }
 
         private IQueryable<Product> DoSearchOnIndex(string sortBy, string keyword, int pageNo)
@@ -50,7 +54,7 @@ namespace MVC5Course.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Product[] data)
+        public ActionResult Index(string ActiveFilter, Product[] data, string sortBy, string keyword, int pageNo = 1)
         {
             if (ModelState.IsValid)
             {
@@ -66,8 +70,10 @@ namespace MVC5Course.Controllers
                 repoProduct.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
-
-            //DoSearchOnIndex(sortBy, keyword, pageNo);
+            var ActiveOptions = repoProduct.All().Select(p => p.Active.HasValue ? p.Active.Value.ToString() : "False").Distinct().ToList();
+            ViewBag.ActiveFilter = new SelectList(ActiveOptions);
+            
+            DoSearchOnIndex(sortBy, keyword, pageNo);
             return View();
         }
 
@@ -173,7 +179,7 @@ namespace MVC5Course.Controllers
         public ActionResult Edit(int id, FormCollection form)
         {
             var product = repoProduct.Find(id);
-            if (TryUpdateModel(product, new string[] { "ProductName", "Stock" }))
+            if (TryUpdateModel(product, new string[] { "ProductName", "Stock", "Active" }))
             {
             }
             repoProduct.UnitOfWork.Commit();

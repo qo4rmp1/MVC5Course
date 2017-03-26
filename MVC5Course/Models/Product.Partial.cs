@@ -18,7 +18,7 @@ namespace MVC5Course.Models
         [Required(ErrorMessage = "請輸入商品名稱{0}")]
         [DisplayName("商品名稱")]
         [StringLength(80, ErrorMessage = "欄位長度不得大於 80 個字元")]
-        [商品名稱不能有qw]
+        //[商品名稱不能有qw]
         //可在1.這邊設定(ErrorMessage ="ProductNameCan'tContain qw")
         //2.覆寫"商品名稱不能有qwAttribute.cs/this.ErrorMessage"
         public string ProductName { get; set; }

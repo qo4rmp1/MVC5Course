@@ -9,6 +9,7 @@
     @Html.TextBox("keyword")
     @*<input type="search" name="keyword" />*@
     <input type="submit" value="Search" />
+    @Html.DropDownList("ActiveFilter", null, "請選擇Active狀態", new { onchange = "" })
 </form>
 @Html.Partial("_Pager", Model)
 <p>
